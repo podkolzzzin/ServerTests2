@@ -18,7 +18,7 @@ namespace Server.ItSelf
 
         public void StartV2()
         {
-            Console.WriteLine("Server started");
+            Console.WriteLine("Server started V2");
             var listener = new TcpListener(System.Net.IPAddress.Any, 80);
             listener.Start();
             while (true)
@@ -29,7 +29,7 @@ namespace Server.ItSelf
 
         public void StartV1()
         {
-            Console.WriteLine("Server started");
+            Console.WriteLine("Server started V1");
             var listener = new TcpListener(System.Net.IPAddress.Any, 80);
             listener.Start();
             while (true)
@@ -50,7 +50,7 @@ namespace Server.ItSelf
 
         public async Task StartAsync()
         {
-            Console.WriteLine("Server started");
+            Console.WriteLine("Server started Async");
             var listener = new TcpListener(System.Net.IPAddress.Any, 80);
             listener.Start();
             while (true)
