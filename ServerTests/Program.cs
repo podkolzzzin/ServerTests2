@@ -9,8 +9,13 @@ namespace ServerTests
         static async Task Main(string[] args)
         {
             var server = new ServerHost(new ControllersHandler(typeof(Program).Assembly));
-            //server.StartV1();
-            //server.StartV2();
+            if (args.Length == 1)
+            {
+                if (args[0] == "1")
+                    server.StartV1();
+                else if (args[0] == "2")
+                    server.StartV2();
+            }
             await server.StartAsync();
         }
     }
