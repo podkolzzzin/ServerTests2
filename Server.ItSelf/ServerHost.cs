@@ -55,7 +55,7 @@ namespace Server.ItSelf
             listener.Start();
             while (true)
             {
-                await ProcessClientAsync(listener.AcceptTcpClient());
+                await ProcessClientAsync(await listener.AcceptTcpClientAsync());
             }
         }
 

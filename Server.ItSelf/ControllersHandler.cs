@@ -43,7 +43,7 @@ namespace Server.ItSelf
         {
             if (routes.TryGetValue(request.Path, out var func))
             {
-                HttpUtil.WriteStatus(System.Net.HttpStatusCode.OK, networkStream);
+                await HttpUtil.WriteStatusAsync(System.Net.HttpStatusCode.OK, networkStream);
                 await WriteResponseAsync(func(), networkStream);
             }
             else
@@ -57,18 +57,18 @@ namespace Server.ItSelf
             if (v is string str)
             {
                 using var writer = new StreamWriter(stream, leaveOpen: true);
-                writer.Write(str);
+                await writer.WriteAsync(str);
             }
             else if (v is byte[] bytes)
             {
-                stream.Write(bytes, 0, bytes.Length);
+                await stream.WriteAsync(bytes, 0, bytes.Length);
             }
             else if (v is Task task)
             {
                 await task;
                 var result = GetResult(task);
                 if (result == null)
-                    HttpUtil.WriteStatus(System.Net.HttpStatusCode.NoContent, stream);
+                    await HttpUtil.WriteStatusAsync(System.Net.HttpStatusCode.NoContent, stream);
                 else
                     await WriteResponseAsync(result, stream);
             }
